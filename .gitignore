@@ -1,8 +1,12 @@
 AuthService/appsettings.json
+AuthService/appsettings.Development.json
 
 AuthService/bin/
 AuthService/obj/
-AuthService/.vs/
+AuthService/.vscode/
 AuthService/.idea/
 
-./idea
+.idea/
+.vscode/
+bin/
+obj/
