@@ -2,6 +2,11 @@ namespace AuthService.Features;
 
 public sealed record Error(string Code, string Description);
 
+public sealed record Unit
+{
+    public static readonly Unit Value = new();
+}
+
 public sealed class Result<T>
 {
     private Result(T? value, IReadOnlyCollection<Error> errors, bool isSuccess)

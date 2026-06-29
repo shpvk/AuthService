@@ -1,6 +1,8 @@
 using AuthService.Database;
 using AuthService.Domain;
+using AuthService.EmailSender;
 using AuthService.Features;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,10 +20,20 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<RegisterUserHandler>();
+builder.Services.AddScoped<VerifyEmailHandler>();
+
+builder.Services.Configure<MailOptions>(builder.Configuration.GetSection(MailOptions.SECTION_NAME));
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+builder.Services.AddScoped<IValidator<RegisterUserRequest>, RegisterUserRequestValidator>();
 
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>()
-    .AddEntityFrameworkStores<AuthDbContext>();
+    .AddEntityFrameworkStores<AuthDbContext>()
+    .AddDefaultTokenProviders();
+
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
