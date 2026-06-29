@@ -1,6 +1,8 @@
 AuthService/appsettings.json
 
-bin/
-obj/
-.vs/
-.idea/
+AuthService/bin/
+AuthService/obj/
+AuthService/.vs/
+AuthService/.idea/
+
+./idea
